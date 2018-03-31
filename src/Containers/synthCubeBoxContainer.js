@@ -1,19 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {SynthCubeContainer} from './synthCube';
+import { SynthCubeBox } from '../Components/synthCubeBox.js';
+import '../Styles/synthCubeBox.css';
 
-class SynthCubeBoxContainer extends React.Component {
+export class SynthCubeBoxContainer extends React.Component {
   constructor (props) {
     super(props);
   }
   render() {
     return (
-      <div>
-        <SynthCubeContainer />
-        <SynthCubeContainer />
-        <SynthCubeContainer />
-      </div>
+      <SynthCubeBox />
     );
   }
 }
-ReactDOM.render(<SynthCubeBoxContainer />, document.getElementByClassName('App'));

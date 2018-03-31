@@ -1,13 +1,14 @@
 import React from 'react';
+import '../Styles/synthCube.css';
+import { SynthCube } from '../Components/synthCube.js';
 
-class SynthCubeContainer extends React.Component {
+export class SynthCubeContainer extends React.Component {
   constructor (props) {
     super(props);
   }
   render() {
     return (
-      <div>
-      </div>
+      <SynthCube />
     );
   }
 }
