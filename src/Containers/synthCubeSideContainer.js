@@ -2,6 +2,7 @@ import React from 'react';
 import '../Styles/synthCubeSide.css';
 import { SynthCubeSide } from '../Components/synthCubeSide.js';
 
+const initialSize = {width: 100, height: 100};
 export class SynthCubeSideContainer extends React.Component {
   constructor (props) {
     super(props);

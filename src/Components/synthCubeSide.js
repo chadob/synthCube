@@ -9,7 +9,7 @@ export class SynthCubeSide extends React.Component {
     const borderWidth = this.props.borderWidth;
     const zOrder = this.props.zOrder;
     return (
-      <div class="cube-side" style={{height:height, width:width, top:top, left: left, borderWidth: borderWidth, zOrder: zOrder }}>
+      <div className="cube-side" style={{height:height, width:width, top:top, left: left, borderWidth: borderWidth, zOrder: zOrder }}>
       </div>
     );
   }
