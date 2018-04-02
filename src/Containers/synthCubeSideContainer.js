@@ -3,63 +3,70 @@ import '../Styles/synthCubeSide.css';
 import { SynthCubeSide } from '../Components/synthCubeSide.js';
 
 const initialSize = {width: 100, height: 100};
-export class SynthCubeSideContainer extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      top: {
-        zOrder: 0,
-        height: "0px",
-        width: "100px",
-        top: "0px",
-        left: "0px",
-        borderWidth: "0px"
-      },
-      bottom: {
-        zOrder: 0,
-        height: "0px",
-        width: "100px",
-        top: "100px",
-        left: "0px",
-        borderWidth: "0px"
-      },
-      front: {
-        zOrder: 0,
-        height: "100px",
-        width: "100px",
-        top: "0px",
-        left: "0px",
-        borderWidth: "10px"
-      },
-      back: {
-        zOrder: 0,
-        height: "100px",
-        width: "100px",
-        top: "0px",
-        left: "0px",
-        borderWidth: "10px"
-      },
-      left: {
-        zOrder: 0,
-        height: "100px",
-        width: "0px",
-        top: "0px",
-        left: "0px",
-        borderWidth: "0px"
-      },
-      right: {
-        zOrder: 0,
-        height: "100px",
-        width: "0px",
-        top: "0px",
-        left: "100px",
-        borderWidth: "0px"
-      }
-    };
+const styles = {
+  top: {
+    zOrder: 0,
+    height: 0,
+    width: 100,
+    top: 0,
+    left: 0,
+    borderWidth: 0
+  },
+  bottom: {
+    zOrder: 0,
+    height: 0,
+    width: 100,
+    top: 100,
+    left: 0,
+    borderWidth: 0
+  },
+  front: {
+    zOrder: 0,
+    height: 100,
+    width: 100,
+    top: 0,
+    left: 0,
+    borderWidth: 10
+  },
+  back: {
+    zOrder: 0,
+    height: 100,
+    width: 100,
+    top: 0,
+    left: 0,
+    borderWidth: 10
+  },
+  left: {
+    zOrder: 0,
+    height: 100,
+    width: 0,
+    top: 0,
+    left: 0,
+    borderWidth: 0
+  },
+  right: {
+    zOrder: 0,
+    height: 100,
+    width: 0,
+    top: 0,
+    left: 100,
+    borderWidth: 0
   }
+}
+export class SynthCubeSideContainer extends React.Component {
   render() {
     return (
-      <SynthCubeSide zOrder={this.state[this.props.side].zOrder} side={this.props.side} height={this.state[this.props.side].height} width={this.state[this.props.side].width} top={this.state[this.props.side].top} left={this.state[this.props.side].left} borderWidth={this.state[this.props.side].borderWidth}/>
+      <SynthCubeSide
+        time={this.props.time}
+        scale={this.props.scale}
+        side={this.props.side}
+        zOrder={styles[this.props.side].zOrder}
+        height={styles[this.props.side].height * this.props.scale}
+        width={styles[this.props.side].width * this.props.scale}
+        top={styles[this.props.side].top}
+        left={styles[this.props.side].left}
+        borderWidth={styles[this.props.side].borderWidth * this.props.scale}
+      />
 
     );
   }
