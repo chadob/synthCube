@@ -1,58 +1,26 @@
-.cube-neon {
-  position: relative;
-  width: 100px;
-  height: 100px;
-}
-.cube-side {
+.cube-stage {
   position: absolute;
-  border: 10px solid transparent;
-  border-image: url(../Assets/tealNeonBorder.jpg) 30% round;
+  width: 200px;
+  height: 200px;
+  -webkit-perspective: 1600px;
+  perspective: 800px;
+  -webkit-perspective-origin: 50% -240px;
+  perspective-origin: 50%;
 }
-.cube-side-front {
-  border: 10px solid transparent;
-  border-image: url(../Assets/tealNeonBorder.jpg) 30% round;
-  top: 0px;
-  margin-top: 10px;
+.cube-neon {
+  position: absolute;
+  top: 50px;
   width: 100px;
   height: 100px;
+  left: 50px;
+  top: 50px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+-webkit-transform: rotateY(30deg);
+-webkit-transform: rotateX(30deg);
+-webkit-animation: rotate 6s infinite linear;
 }
-.cube-side-top {
-  border: 0px solid transparent;
-  border-image: url(../Assets/tealNeonBorder.jpg) 30% round;
-  top: 0px;
-  margin-top: 10px;
-  width: 100px;
-  height: 0px;
-}
-.cube-side-back {
-  border: 10px solid transparent;
-  border-image: url(../Assets/tealNeonBorder.jpg) 30% round;
-  top: 0px;
-  margin-top: 10px;
-  width: 100px;
-  height: 100px;
-}
-.cube-side-bottom {
-  border: 0px solid transparent;
-  border-image: url(../Assets/tealNeonBorder.jpg) 30% round;
-  top: 100px;
-  margin-top: 10px;
-  width: 100px;
-  height: 0px;
-}
-.cube-side-left {
-  border: 0px solid transparent;
-  border-image: url(../Assets/tealNeonBorder.jpg) 30% round;
-  left: 0px;
-  margin-top: 10px;
-  width: 0px;
-  height: 100px;
-}
-.cube-side-right {
-  border: 0px solid transparent;
-  border-image: url(../Assets/tealNeonBorder.jpg) 30% round;
-  left: 100px;
-  margin-top: 10px;
-  width: 0px;
-  height: 100px;
+@-webkit-keyframes rotate {
+  0% { -webkit-transform: rotateX(0deg) rotateY(0deg);}
+  100% { -webkit-transform: rotateX(360deg) rotateY(360deg);}
 }

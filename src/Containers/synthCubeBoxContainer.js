@@ -3,7 +3,7 @@ import { SynthCubeBox } from '../Components/synthCubeBox.js';
 import '../Styles/synthCubeBox.css';
 
 
-const initialState = {width: 500, height: 100, time: 0, maxTime: 6, scale: 1};
+const initialState = {width: "100%", height: "100%", time: 0, maxTime: 6, scale: 1};
 export class SynthCubeBoxContainer extends React.Component {
   constructor (props) {
     super(props);
@@ -18,7 +18,6 @@ export class SynthCubeBoxContainer extends React.Component {
   tick () {
     if (this.state.time < this.state.maxTime) {
       this.setState(function(prevState) {
-        console.log(prevState);
         return {
           time: prevState.time + 1/60,
           scale: (this.state.time % initialState.maxTime) <= initialState.maxTime / 2 ?
@@ -30,9 +29,7 @@ export class SynthCubeBoxContainer extends React.Component {
         };
       });
     } else {
-      clearInterval(this.cubeTimer);
       this.setState(function(prevState) {
-        console.log(prevState);
         return {
           time: 0,
           scale: initialState.scale,
