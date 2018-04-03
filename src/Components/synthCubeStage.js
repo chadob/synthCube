@@ -8,14 +8,23 @@ export class SynthCubeStage extends React.Component {
         <SynthCubeContainer
           time={this.props.time}
           scale={this.props.scale}
+          positions={this.props.positions}
+          width={this.props.cubeWidth}
+          height={this.props.cubeHeight}
           number="left" />
         <SynthCubeContainer
           time={this.props.time}
           scale={this.props.scale}
+          positions={this.props.positions}
+          width={this.props.cubeWidth}
+          height={this.props.cubeHeight}
           number="middle" />
         <SynthCubeContainer
           time={this.props.time}
           scale={this.props.scale}
+          positions={this.props.positions}
+          width={this.props.cubeWidth}
+          height={this.props.cubeHeight}
           number="right" />
       </div>
     );
