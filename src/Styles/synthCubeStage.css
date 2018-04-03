@@ -1,0 +1,9 @@
+.cube-stage {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  -webkit-perspective: 1600px;
+  perspective: 800px;
+  -webkit-perspective-origin: 50% -240px;
+  perspective-origin: 50%;
+}

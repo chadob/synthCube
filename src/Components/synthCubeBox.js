@@ -1,5 +1,6 @@
 import React from 'react';
-import { SynthCubeContainer } from '../Containers/synthCubeContainer';
+import { SynthCubeStageContainer } from '../Containers/synthCubeStageContainer';
+
 export class SynthCubeBox extends React.Component {
   render() {
     const width = this.props.width;
@@ -8,7 +9,7 @@ export class SynthCubeBox extends React.Component {
     const time = this.props.time;
     return (
       <div className="cube-box" style={{width:width, height:height}}>
-        <SynthCubeContainer scale={scale} time={time}/>
+        <SynthCubeStageContainer scale={scale} time={time}/>
       </div>
     );
   }
