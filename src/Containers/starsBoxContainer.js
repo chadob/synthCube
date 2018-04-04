@@ -16,29 +16,8 @@ export class StarsBoxContainer extends React.Component {
         this.tick(), 1000
     );
   }
-  tick () {
-    if (this.state.time < this.state.maxTime) {
-      this.setState(function(prevState) {
-        return {
-          time: prevState.time + 1/60,
-          scale: (this.state.time % initialState.maxTime) <= initialState.maxTime / 2 ?
-            (initialState.scale + this.state.time)
-            :
-            (this.state.maxTime / 2 + 1) - ((this.state.time + 1) - (this.state.maxTime / 2 + 1)),
-          width: initialState.width * this.state.scale,
-          height: initialState.height * this.state.scale
-        };
-      });
-    } else {
-      this.setState(function(prevState) {
-        return {
-          time: 0,
-          scale: initialState.scale,
-          width: initialState.width,
-          height: initialState.height
-        };
-      });
-    }
+  spawnStar() {
+    
   }
 
   render() {
