@@ -7,7 +7,6 @@ export class SynthCubeSide extends React.Component {
     const height = this.props.height;
     const width = this.props.width;
     const transform = this.props.transform;
-    console.log(transform);
     const borderWidth = this.props.borderWidth;
     const zOrder = this.props.zOrder;
     return (
