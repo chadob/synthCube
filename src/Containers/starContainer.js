@@ -9,30 +9,40 @@ export class StarContainer extends React.Component {
     super(props);
     this.state = {
       starColor: colors[Math.floor(Math.random() * colors.length)],
-      startPoint: {
-        x: this.props.starRange.x[Math.floor(Math.random() * this.props.starRange.x.length)],
-        y: this.props.starRange.y[Math.floor(Math.random() * this.props.starRange.y.length)]
+      position: {
+        left: this.props.starRange.x[Math.floor(Math.random() * this.props.starRange.x.length)],
+        top: this.props.starRange.y[Math.floor(Math.random() * this.props.starRange.y.length)]
       },
+      width: ,
+      height: ,
       speed: {
         xSpeed: this.props.windowDem.width / 4,
         ySpeed: this.props.windowDem.height / 4
-      }
+      },
+      trajectory: ((this.props.starRange.x[Math.floor(Math.random() * this.props.starRange.x.length)]) - this.props.windowDem.midScreenX) / ((this.props.starRange.y[Math.floor(Math.random() * this.props.starRange.y.length)]) - this.props.windowDem.midScreenY),
+      distanceMid: ((this.props.starRange.x[Math.floor(Math.random() * this.props.starRange.x.length)]) - this.props.windowDem.midScreenX) + ((this.props.starRange.y[Math.floor(Math.random() * this.props.starRange.y.length)]) - this.props.windowDem.midScreenX),
+      maxSize: (((this.props.starRange.x[Math.floor(Math.random() * this.props.starRange.x.length)]) - this.props.windowDem.midScreenX) + ((this.props.starRange.y[Math.floor(Math.random() * this.props.starRange.y.length)]) - this.props.windowDem.midScreenX)) / (this.props.windowDem.width + this.props.windowDem.height)
     }
-
   }
-  moveStar(curPos, speed) {
-    return {
-      left: (curPos.x > 0 ? curPos.x + speed.xSpeed : curPos.x - speed.xSpeed),
-      top: (curPos.y > 0 ? curPos.y + speed.ySpeed : curPos.y - speed.ySpeed)
-    };
+
+  moveStar() {
+    this.setState({
+      position: {
+        left: (this.state.position.left > 0 ? this.state.position.left + this.state.speed.xSpeed : this.state.position.left - this.state.speed.xSpeed),
+        top: (this.state.position.top > 0 ? this.state.position.top + this.state.speed.ySpeed : this.state.position.top - this.state.speed.ySpeed)
+      }
+    });
+  }
+  growStar(width, height) {
+    this.setState({
+      width: width + ,
+      height: height +
+    });
   }
   render() {
-    const trajectory = (this.state.startPoint.x - this.props.windowDem.midScreenX) / (this.state.startPoint.y - this.props.windowDem.midScreenY);
-    const distanceMid = (this.state.startPoint.x - this.props.windowDem.midScreenX) + (this.state.startPoint.y - this.props.windowDem.midScreenX);
-    const maxSize = distanceMid / (this.props.windowDem.width + this.props.windowDem.height);
     return (
       <div>
-        <Star/>
+        <Star startPoint={this.state.starPoint} color={this.state.starColor} speed={this.state.speed} width={} height={} />
       </div>
     );
   }

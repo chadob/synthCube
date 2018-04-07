@@ -4,7 +4,7 @@ export class StarsBox extends React.Component {
   render() {
     return (
       <div>
-        <StarContainer windowDem={this.props.windowDem} starRange={this.props.starRange} width={this.props.width} height={this.props.height}/>
+        <StarContainer windowDem={this.props.windowDem} starRange={this.props.starRange} winWidth={this.props.width} winHeight={this.props.height}/>
       </div>
     );
   }

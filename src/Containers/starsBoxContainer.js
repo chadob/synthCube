@@ -50,7 +50,7 @@ export class StarsBoxContainer extends React.Component {
     console.log(this.state.starRange);
     return (
       <div>
-        <StarsBox windowDem={this.state.windowDem} starRange={this.state.starRange} width={this.state.width} height={this.state.height}/>
+        <StarsBox windowDem={this.state.windowDem} starRange={this.state.starRange} />
       </div>
     );
   }
