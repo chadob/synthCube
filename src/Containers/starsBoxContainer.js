@@ -2,19 +2,19 @@ import React from 'react';
 import '../Styles/starsBox.css';
 import { StarsBox } from '../Components/starsBox.js';
 
-const initialSize = {height: 100, width: 10}
 const initialState = {
   width: "100%",
   height: "100%",
-  time: 0,
-  maxTime: 6,
+  refreshRate: 1000/60,
   scale: 1,
   windowDem: {
     width: window.innerWidth,
     height: window.innerHeight,
     midScreenX: window.innerWidth / 2,
     midScreenY: window.innerHeight / 2,
-  }
+  },
+  starsArray: [],
+  colors: ['#C501E1', '#9628F9', '#6465FD', '#9628F9', '#2E96F9', '#15E8C8', '#2EF9A0', '#C6E501', '#FE6A5C', '#F72E96', '#E830CE']
 };
 
 export class StarsBoxContainer extends React.Component {
@@ -31,26 +31,51 @@ export class StarsBoxContainer extends React.Component {
           Math.random() * (this.state.windowDem.height - this.state.windowDem.midScreenY) + this.state.windowDem.midScreenY
         ]
     };
+    this.spawnStar();
   }
   starSpawnInterval() {
     const interval = Math.random() * (1000 - 500) + 500;
     setTimeout( ()=> {
-      this.spawnStar(interval);
+      this.spawnStar();
       this.starSpawnInterval();
     }, interval);
   }
   componentDidMount(prevProps, prevState) {
     this.starSpawnInterval();
   }
-  spawnStar(interval) {
-
+  spawnStar() {
+    const starColor = this.state.colors[Math.floor(Math.random() * this.state.colors.length)];
+    const position = {
+      left: this.state.starRange.x[Math.floor(Math.random() * this.state.starRange.x.length)],
+      top: this.state.starRange.y[Math.floor(Math.random() * this.state.starRange.y.length)]
+    };
+    const distanceMid = Math.abs(position.left + this.props.windowDem.midScreenX) + (position.top - this.props.windowDem.midScreenX);
+    const speed = {
+      xSpeed: this.props.windowDem.width / 3 / this.state.refreshRate, //be
+      ySpeed: this.props.windowDem.height / 3 / this.state.refreshRate
+    };
+    const width = 10;
+    const height = 100;
+    const lifeSpan = 3000;
+    const maxSize = (position.left - this.props.windowDem.midScreenX) + (position.top - this.props.windowDem.midScreenX) / (this.props.windowDem.width + this.props.windowDem.height);
+    this.setState({
+      starsArray: this.state.starsArray.push({
+        starColor: starColor,
+        position: position,
+        width: width,
+        height: height,
+        speed: speed,
+        timeAlive: 0,
+        lifeSpan: lifeSpan,
+      })
+    });
   }
 
   render() {
     console.log(this.state.starRange);
     return (
       <div>
-        <StarsBox windowDem={this.state.windowDem} starRange={this.state.starRange} />
+        <StarsBox windowDem={this.state.windowDem} starsArray={this.state.starsArray} starRange={this.state.starRange} />
       </div>
     );
   }

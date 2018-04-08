@@ -2,29 +2,34 @@ import React from 'react';
 import '../Styles/star.css';
 import { Star } from '../Components/star.js';
 
-const colors = ['#C501E1', '#9628F9', '#6465FD', '#9628F9', '#2E96F9', '#15E8C8', '#2EF9A0', '#C6E501', '#FE6A5C', '#F72E96', '#E830CE'];
-
 export class StarContainer extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      starColor: colors[Math.floor(Math.random() * colors.length)],
-      position: {
-        left: this.props.starRange.x[Math.floor(Math.random() * this.props.starRange.x.length)],
-        top: this.props.starRange.y[Math.floor(Math.random() * this.props.starRange.y.length)]
-      },
-      width: ,
-      height: ,
-      speed: {
-        xSpeed: this.props.windowDem.width / 4,
-        ySpeed: this.props.windowDem.height / 4
-      },
-      trajectory: ((this.props.starRange.x[Math.floor(Math.random() * this.props.starRange.x.length)]) - this.props.windowDem.midScreenX) / ((this.props.starRange.y[Math.floor(Math.random() * this.props.starRange.y.length)]) - this.props.windowDem.midScreenY),
-      distanceMid: ((this.props.starRange.x[Math.floor(Math.random() * this.props.starRange.x.length)]) - this.props.windowDem.midScreenX) + ((this.props.starRange.y[Math.floor(Math.random() * this.props.starRange.y.length)]) - this.props.windowDem.midScreenX),
-      maxSize: (((this.props.starRange.x[Math.floor(Math.random() * this.props.starRange.x.length)]) - this.props.windowDem.midScreenX) + ((this.props.starRange.y[Math.floor(Math.random() * this.props.starRange.y.length)]) - this.props.windowDem.midScreenX)) / (this.props.windowDem.width + this.props.windowDem.height)
+      starColor: this.props.starColor,
+      position: this.props.position,
+      width: this.props.width,
+      height: this.props.height,
+      speed: this.props.speed,
+      growthRate: this.props.growthRate,
+      timeAlive: this.props.timeAlive,
+      lifeSpan: this.props.lifeSpan
+    };
+    console.log(props);
+  }
+  componentDidMount(prevProps, prevState) {
+    this.setUpStar();
+    this.cubeTimer = setInterval(
+      () =>
+        this.tick(), 1000/60
+    );
+  }
+  tick() {
+    if (this.state.height < this.state.maxHeight) {
+      this.moveStar();
+    } else {
     }
   }
-
   moveStar() {
     this.setState({
       position: {
@@ -33,16 +38,16 @@ export class StarContainer extends React.Component {
       }
     });
   }
-  growStar(width, height) {
+  growStar() {
     this.setState({
-      width: width + ,
-      height: height +
+      width: this.state.width,
+      height: this.state.height + 10
     });
   }
   render() {
     return (
       <div>
-        <Star startPoint={this.state.starPoint} color={this.state.starColor} speed={this.state.speed} width={} height={} />
+        <Star position={this.state.position} color={this.props.starColor} speed={this.props.speed} width={this.state.width} height={this.state.height} />
       </div>
     );
   }
