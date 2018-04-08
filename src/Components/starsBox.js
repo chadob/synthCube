@@ -1,9 +1,11 @@
 import React from 'react';
 import { StarContainer } from '../Containers/starContainer'
+
 export class StarsBox extends React.Component {
   render() {
+    console.log(this.props);
     return (
-      <div style={{width: this.state.width, height: this.state.height}}>
+      <div style={{width: this.props.width, height: this.props.height}}>
         this.props.starsArray.map((star, index) => {
           <StarContainer
             starColor={star.starColor}
