@@ -18,7 +18,6 @@ export class StarContainer extends React.Component {
     console.log(props);
   }
   componentDidMount(prevProps, prevState) {
-    this.setUpStar();
     this.cubeTimer = setInterval(
       () =>
         this.tick(), 1000/60

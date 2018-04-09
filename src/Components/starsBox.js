@@ -6,7 +6,7 @@ export class StarsBox extends React.Component {
     console.log(this.props);
     return (
       <div style={{width: this.props.width, height: this.props.height}}>
-        this.props.starsArray.map((star, index) => {
+        {this.props.starsArray.map((star, index) =>
           <StarContainer
             starColor={star.starColor}
             position={star.position}
@@ -17,7 +17,7 @@ export class StarsBox extends React.Component {
             timeAlive={star.timeAlive}
             lifeSpan={star.lifeSpan}
           />
-        });
+        )}
       </div>
     );
   }
