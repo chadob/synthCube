@@ -8,6 +8,7 @@ export class StarContainer extends React.Component {
     this.state = {
       starColor: this.props.starColor,
       position: this.props.position,
+      rotation: this.props.rotation,
       width: this.props.width,
       height: this.props.height,
       speed: this.props.speed,
@@ -15,7 +16,6 @@ export class StarContainer extends React.Component {
       timeAlive: this.props.timeAlive,
       lifeSpan: this.props.lifeSpan
     };
-    console.log(props);
   }
   componentDidMount(prevProps, prevState) {
     this.cubeTimer = setInterval(
@@ -26,6 +26,7 @@ export class StarContainer extends React.Component {
   tick() {
     if (this.state.height < this.state.maxHeight) {
       this.moveStar();
+      this.growStar();
     } else {
     }
   }
@@ -38,15 +39,16 @@ export class StarContainer extends React.Component {
     });
   }
   growStar() {
+    const newHeight = this.state.height;
     this.setState({
       width: this.state.width,
-      height: this.state.height + 10
+      height: newHeight + 10
     });
   }
   render() {
     return (
-      <div>
-        <Star position={this.state.position} color={this.props.starColor} speed={this.props.speed} width={this.state.width} height={this.state.height} />
+      <div className="star-container">
+        <Star position={this.state.position} rotation={this.state.rotation} color={this.props.starColor} speed={this.props.speed} width={this.state.width} height={this.state.height} />
       </div>
     );
   }

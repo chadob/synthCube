@@ -24,8 +24,6 @@ export class SynthCubeBoxContainer extends React.Component {
             (initialState.scale + this.state.time)
             :
             (this.state.maxTime / 2 + 1) - ((this.state.time + 1) - (this.state.maxTime / 2 + 1)),
-          width: initialState.width * this.state.scale,
-          height: initialState.height * this.state.scale
         };
       });
     } else {
@@ -33,8 +31,6 @@ export class SynthCubeBoxContainer extends React.Component {
         return {
           time: 0,
           scale: initialState.scale,
-          width: initialState.width,
-          height: initialState.height
         };
       });
     }

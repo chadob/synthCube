@@ -8,7 +8,7 @@ export class SynthCubeBox extends React.Component {
     const scale = this.props.scale;
     const time = this.props.time;
     return (
-      <div className="cube-box" style={{width:width, height:height}}>
+      <div className="cube-box" style={{overflow:'hidden', width:width, height:height}}>
         <SynthCubeStageContainer scale={scale} time={time}/>
       </div>
     );
