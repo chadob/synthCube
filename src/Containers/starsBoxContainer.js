@@ -37,7 +37,7 @@ export class StarsBoxContainer extends React.Component {
     const interval = Math.random() * (1000 - 500) + 500;
     setTimeout( ()=> {
       this.spawnStar();
-      this.starSpawnInterval();
+      // this.starSpawnInterval();
     }, interval);
   }
   componentDidMount(prevProps, prevState) {
@@ -85,8 +85,11 @@ export class StarsBoxContainer extends React.Component {
     });
   }
   deleteStar(star) {
+    console.log(this.state);
     const tempStarsArray = this.state.starsArray;
+    console.log(tempStarsArray);
     tempStarsArray.splice(star, 1);
+    console.log(tempStarsArray);
     this.setState({
       starsArray: tempStarsArray
     });
@@ -94,7 +97,7 @@ export class StarsBoxContainer extends React.Component {
   render() {
     return (
       <div>
-        <StarsBox windowDem={this.state.windowDem} starsArray={this.state.starsArray} starRange={this.state.starRange} />
+        <StarsBox deleteStar={this.deleteStar} midScreenX={this.state.windowDem.midScreenX} midScreenY={this.state.windowDem.midScreenY} windowDem={this.state.windowDem} starsArray={this.state.starsArray} starRange={this.state.starRange} />
       </div>
     );
   }
