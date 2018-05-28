@@ -18,10 +18,9 @@ export class StarContainer extends React.Component {
     };
   }
   componentDidMount(prevProps, prevState) {
-    console.log(this.state);
     this.cubeTimer = setInterval(
       () =>
-        this.tick(), 1000/60
+        this.tick(), 1000/6
     );
   }
   tick() {
@@ -32,17 +31,15 @@ export class StarContainer extends React.Component {
       this.moveStar();
       // this.growStar();
     } else {
-      console.log(this.props.deleteStar);
+      clearInterval(this.cubeTimer);
       this.props.deleteStar(this.props.identity);
     }
   }
   moveStar() {
-    // console.log(this.state.position.left);
-    // console.log(this.state.position.top);
     this.setState({
       position: {
-        left: (this.state.position.left > this.props.midScreenX ? this.state.position.left + this.state.speed.xSpeed : this.state.position.left - this.state.speed.xSpeed),
-        top: (this.state.position.top > this.props.midScreenY ? this.state.position.top + this.state.speed.ySpeed : this.state.position.top - this.state.speed.ySpeed)
+        left: (this.state.position.left >= this.props.midScreenX ? this.state.position.left += this.state.speed.xSpeed : this.state.position.left -= this.state.speed.xSpeed),
+        top: (this.state.position.top >= this.props.midScreenY ? this.state.position.top += this.state.speed.ySpeed : this.state.position.top -= this.state.speed.ySpeed)
       }
     });
   }

@@ -15,3 +15,9 @@ body {
   height: 100%;
   width: 100%;
 }
+.middle-dot {
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  background-color: blue;
+}

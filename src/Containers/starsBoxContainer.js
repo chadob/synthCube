@@ -5,7 +5,7 @@ import { StarsBox } from '../Components/starsBox.js';
 const initialState = {
   width: "100%",
   height: "100%",
-  refreshRate: 1000/60,
+  refreshRate: 1000/6,
   scale: 1,
   windowDem: {
     width: window.innerWidth,
@@ -21,7 +21,7 @@ const initialState = {
       height: 100,
       speed: {xSpeed: 1, ySpeed: 1},
       timeAlive: 2000,
-      lifeSpan: 3000
+      lifeSpan: 6000
     }
   ],
     colors: ['#C501E1', '#9628F9', '#6465FD', '#9628F9', '#2E96F9', '#15E8C8', '#2EF9A0', '#C6E501', '#FE6A5C', '#F72E96', '#E830CE']
@@ -32,15 +32,19 @@ export class StarsBoxContainer extends React.Component {
     super(props);
     this.state = initialState;
     console.log(this.state);
+    this.deleteStar = this.deleteStar.bind(this);
   }
   starSpawnInterval() {
-    const interval = Math.random() * (1000 - 500) + 500;
+    const interval = 6000;
     setTimeout( ()=> {
       this.spawnStar();
-      // this.starSpawnInterval();
+      this.starSpawnInterval();
     }, interval);
   }
   componentDidMount(prevProps, prevState) {
+    for (var i = 0; i < 5; i++) {
+      this.spawnStar();
+    }
     this.starSpawnInterval();
   }
   spawnStar() {
@@ -56,10 +60,11 @@ export class StarsBoxContainer extends React.Component {
         ]
     };
     const position = {
-      left: starRange.x[Math.floor(Math.random() * starRange.x.length)],
-      top: starRange.y[Math.floor(Math.random() * starRange.y.length)]
+      left: 800,
+      top: 500
     };
-    const rotation = Math.atan((position.top - this.state.windowDem.midScreenY) / (position.left - this.state.windowDem.midScreenX)) * 180/Math.PI + 90;
+    const rotation = Math.atan((position.top - this.state.windowDem.midScreenY) / (position.left - this.state.windowDem.midScreenX)) * 180/Math.PI + 270;
+    console.log(rotation);
     const distanceMid = Math.abs(position.left + this.state.windowDem.midScreenX) + (position.top - this.state.windowDem.midScreenX);
     const speed = {
       xSpeed: this.state.windowDem.width / 3 / this.state.refreshRate, //be
@@ -67,7 +72,7 @@ export class StarsBoxContainer extends React.Component {
     };
     const width = 10;
     const height = 100;
-    const lifeSpan = 3000;
+    const lifeSpan = 6000;
     const maxSize = (position.left - this.state.windowDem.midScreenX) + (position.top - this.state.windowDem.midScreenX) / (this.state.windowDem.width + this.state.windowDem.height);
     const tempStarsArray = this.state.starsArray;
     tempStarsArray.push({
@@ -85,11 +90,8 @@ export class StarsBoxContainer extends React.Component {
     });
   }
   deleteStar(star) {
-    console.log(this.state);
     const tempStarsArray = this.state.starsArray;
-    console.log(tempStarsArray);
     tempStarsArray.splice(star, 1);
-    console.log(tempStarsArray);
     this.setState({
       starsArray: tempStarsArray
     });

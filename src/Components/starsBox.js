@@ -12,7 +12,7 @@ export class StarsBox extends React.Component {
             deleteStar={this.props.deleteStar}
             starColor={star.starColor}
             midScreenX={this.props.midScreenX}
-            midScreenX={this.props.midScreenY}
+            midScreenY={this.props.midScreenY}
             position={star.position}
             rotation={star.rotation}
             width={star.width}
