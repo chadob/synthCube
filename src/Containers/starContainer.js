@@ -11,7 +11,7 @@ export class StarContainer extends React.Component {
       rotation: this.props.rotation,
       width: this.props.width,
       height: this.props.height,
-      speed: this.props.speed,
+      movement: this.props.movement,
       growthRate: this.props.growthRate,
       timeAlive: this.props.timeAlive,
       lifeSpan: this.props.lifeSpan
@@ -38,8 +38,8 @@ export class StarContainer extends React.Component {
   moveStar() {
     this.setState({
       position: {
-        left: (this.state.position.left >= this.props.midScreenX ? this.state.position.left += this.state.speed.xSpeed : this.state.position.left -= this.state.speed.xSpeed),
-        top: (this.state.position.top >= this.props.midScreenY ? this.state.position.top += this.state.speed.ySpeed : this.state.position.top -= this.state.speed.ySpeed)
+        left: (this.state.position.left >= this.props.midScreenX ? this.state.position.left += this.state.movement.x : this.state.position.left -= this.state.movement.x),
+        top: (this.state.position.top >= this.props.midScreenY ? this.state.position.top += this.state.movement.y : this.state.position.top -= this.state.movement.y)
       }
     });
   }
@@ -53,7 +53,7 @@ export class StarContainer extends React.Component {
   render() {
     return (
       <div className="star-container">
-        <Star position={this.state.position} rotation={this.state.rotation} color={this.props.starColor} speed={this.props.speed} width={this.state.width} height={this.state.height} />
+        <Star position={this.state.position} rotation={this.state.rotation} color={this.props.starColor} movement={this.props.movement} width={this.state.width} height={this.state.height} />
       </div>
     );
   }

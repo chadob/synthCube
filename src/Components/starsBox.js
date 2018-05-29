@@ -17,7 +17,7 @@ export class StarsBox extends React.Component {
             rotation={star.rotation}
             width={star.width}
             height={star.height}
-            speed={star.speed}
+            movement={star.movement}
             growthRate={star.growthRate}
             timeAlive={star.timeAlive}
             lifeSpan={star.lifeSpan}

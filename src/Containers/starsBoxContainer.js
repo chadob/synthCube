@@ -19,7 +19,7 @@ const initialState = {
       position: {left: 2, top: 3},
       width: 10,
       height: 100,
-      speed: {xSpeed: 1, ySpeed: 1},
+      movement: {x: 1, y: 1},
       timeAlive: 2000,
       lifeSpan: 6000
     }
@@ -31,7 +31,6 @@ export class StarsBoxContainer extends React.Component {
   constructor (props) {
     super(props);
     this.state = initialState;
-    console.log(this.state);
     this.deleteStar = this.deleteStar.bind(this);
   }
   starSpawnInterval() {
@@ -46,6 +45,7 @@ export class StarsBoxContainer extends React.Component {
       this.spawnStar();
     }
     this.starSpawnInterval();
+    console.log(this.state);
   }
   spawnStar() {
     const starColor = this.state.colors[Math.floor(Math.random() * this.state.colors.length)];
@@ -60,18 +60,30 @@ export class StarsBoxContainer extends React.Component {
         ]
     };
     const position = {
-      left: 800,
+      left: 810,
       top: 500
     };
-    const rotation = Math.atan((position.top - this.state.windowDem.midScreenY) / (position.left - this.state.windowDem.midScreenX)) * 180/Math.PI + 270;
+    const slope = (position.top - this.state.windowDem.midScreenY) / (position.left - this.state.windowDem.midScreenX);
+    const rotation = Math.atan(slope) * 180/Math.PI + 270;
     console.log(rotation);
-    const distanceMid = Math.abs(position.left + this.state.windowDem.midScreenX) + (position.top - this.state.windowDem.midScreenX);
-    const speed = {
-      xSpeed: this.state.windowDem.width / 3 / this.state.refreshRate, //be
-      ySpeed: this.state.windowDem.height / 3 / this.state.refreshRate
+    const distanceMid = Math.sqrt(Math.pow((position.left - this.state.windowDem.midScreenX), 2) + (Math.pow(position.top - this.state.windowDem.midScreenX), 2));
+    const percentDone = {
+      x: position.left / this.state.windowDem.width,
+      y: position.top / this.state.windowDem.height
     };
-    const width = 10;
-    const height = 100;
+    const distanceFromSides = {
+      x: this.state.windowDem.width - position.left,
+      y: this.state.windowDem.height - position.top
+    };
+    const endPoint = percentDone.x > percentDone.y ? {x: this.state.windowDem.width, y: this.state.windowDem.width * slope} : {x: this.state.windowDem.height / slope, y: this.state.windowDem.height};
+    console.log(endPoint);
+    const maxTimeAlive = 3;
+    const movement = {
+      xMovement: (endPoint.x - this.state.windowDem.midScreenX) / 3 / this.state.refreshRate, //be
+      yMovement: (endPoint.y - this.state.windowDem.midScreenY) / 3 / this.state.refreshRate
+    };
+    const width = 5;
+    const height = 50;
     const lifeSpan = 6000;
     const maxSize = (position.left - this.state.windowDem.midScreenX) + (position.top - this.state.windowDem.midScreenX) / (this.state.windowDem.width + this.state.windowDem.height);
     const tempStarsArray = this.state.starsArray;
@@ -81,7 +93,7 @@ export class StarsBoxContainer extends React.Component {
       rotation: rotation,
       width: width,
       height: height,
-      speed: speed,
+      movement: {x: movement.xMovement, y: movement.yMovement},
       timeAlive: 0,
       lifeSpan: lifeSpan
     });

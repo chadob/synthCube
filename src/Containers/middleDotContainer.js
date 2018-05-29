@@ -7,15 +7,16 @@ export class MiddleDotContainer extends React.Component {
     this.state = {
       width: 10,
       height: 10,
-      top: window.innerWidth / 2,
-      left: window.innerHeight / 2,
+      top: window.innerHeight / 2,
+      left: window.innerWidth / 2,
       background: "blue"
     };
   }
   render() {
     return (
       <div className="middle-dot">
-        <MiddleDot top={this.state.top} left={this.state.left} width={this.state.width} height={this.state.height} background={this.state.background}/>
+        <MiddleDot top={this.state.top} left={this.state.left} width={this.state.width} height={this.state.height} background={this.state.background} />
+        <MiddleDot top={500} left={810} width={this.state.width} height={this.state.height} background={this.state.background} />
       </div>
     );
   }
