@@ -28,7 +28,7 @@ export class StarContainer extends React.Component {
       timeAlive: this.state.timeAlive +=1000/60
     })
     if (this.state.timeAlive < this.state.lifeSpan) {
-      this.moveStar();
+      // this.moveStar();
       // this.growStar();
     } else {
       clearInterval(this.cubeTimer);

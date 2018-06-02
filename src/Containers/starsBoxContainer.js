@@ -65,6 +65,21 @@ export class StarsBoxContainer extends React.Component {
     };
     const slope = (position.top - this.state.windowDem.midScreenY) / (position.left - this.state.windowDem.midScreenX);
     const rotation = Math.atan(slope) * 180/Math.PI + 270;
+    const width = 5;
+    const height = 50;
+    const halfH = .5 * height;
+    //law of cosines c^2 = a^2 + b^2 - 2abcosC
+    const hyp = Math.sqrt(Math.pow(halfH, 2) + Math.pow(halfH,2) - (2 * halfH * halfH * Math.cos(Math.abs((180 - rotation) / 2) * Math.PI /180)));
+    console.log(Math.cos(Math.abs((180 - rotation) / 2) * Math.PI /180));
+    console.log(hyp);
+    //tangent of known angle over hypoteneuse = tangent of other known angle over unknown side
+    const tOffset = (hyp /Math.tan(90 * Math.PI /180)) * Math.tan((90 - ((180 - rotation) / 2)) * Math.PI /180);
+    //a^2 + b^2 = c^2. Solving for a
+    const lOffset = Math.sqrt(Math.abs(Math.pow(hyp, 2) - Math.pow(tOffset, 2)));
+    position.left = position.left + lOffset;
+    position.top = position.top + tOffset;
+    console.log(position.left);
+    console.log(position.top);
     console.log(rotation);
     const distanceMid = Math.sqrt(Math.pow((position.left - this.state.windowDem.midScreenX), 2) + (Math.pow(position.top - this.state.windowDem.midScreenX), 2));
     const percentDone = {
@@ -82,8 +97,6 @@ export class StarsBoxContainer extends React.Component {
       xMovement: (endPoint.x - this.state.windowDem.midScreenX) / 3 / this.state.refreshRate, //be
       yMovement: (endPoint.y - this.state.windowDem.midScreenY) / 3 / this.state.refreshRate
     };
-    const width = 5;
-    const height = 50;
     const lifeSpan = 6000;
     const maxSize = (position.left - this.state.windowDem.midScreenX) + (position.top - this.state.windowDem.midScreenX) / (this.state.windowDem.width + this.state.windowDem.height);
     const tempStarsArray = this.state.starsArray;
