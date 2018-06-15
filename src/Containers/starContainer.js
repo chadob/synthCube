@@ -18,38 +18,38 @@ export class StarContainer extends React.Component {
     };
   }
   componentDidMount(prevProps, prevState) {
-    this.cubeTimer = setInterval(
-      () =>
-        this.tick(), 1000/6
-    );
+    // this.cubeTimer = setInterval(
+    //   () =>
+    //     this.tick(), 1000/6
+    // );
   }
-  tick() {
-    this.setState({
-      timeAlive: this.state.timeAlive +=1000/60
-    })
-    if (this.state.timeAlive < this.state.lifeSpan) {
-      // this.moveStar();
-      // this.growStar();
-    } else {
-      clearInterval(this.cubeTimer);
-      this.props.deleteStar(this.props.identity);
-    }
-  }
-  moveStar() {
-    this.setState({
-      position: {
-        left: (this.state.position.left >= this.props.midScreenX ? this.state.position.left += this.state.movement.x : this.state.position.left -= this.state.movement.x),
-        top: (this.state.position.top >= this.props.midScreenY ? this.state.position.top += this.state.movement.y : this.state.position.top -= this.state.movement.y)
-      }
-    });
-  }
-  growStar() {
-    const newHeight = this.state.height;
-    this.setState({
-      width: this.state.width,
-      height: newHeight + 10
-    });
-  }
+  // tick() {
+  //   this.setState({
+  //     timeAlive: this.state.timeAlive +=1000/60
+  //   })
+  //   if (this.state.timeAlive < this.state.lifeSpan) {
+  //     // this.moveStar();
+  //     // this.growStar();
+  //   } else {
+  //     clearInterval(this.cubeTimer);
+  //     this.props.deleteStar(this.props.identity);
+  //   }
+  // }
+  // moveStar() {
+  //   this.setState({
+  //     position: {
+  //       left: (this.state.position.left >= this.props.midScreenX ? this.state.position.left += this.state.movement.x : this.state.position.left -= this.state.movement.x),
+  //       top: (this.state.position.top >= this.props.midScreenY ? this.state.position.top += this.state.movement.y : this.state.position.top -= this.state.movement.y)
+  //     }
+  //   });
+  // }
+  // growStar() {
+  //   const newHeight = this.state.height;
+  //   this.setState({
+  //     width: this.state.width,
+  //     height: newHeight + 10
+  //   });
+  // }
   render() {
     return (
       <div className="star-container">

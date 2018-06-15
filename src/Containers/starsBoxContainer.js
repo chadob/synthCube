@@ -108,6 +108,24 @@ export class StarsBoxContainer extends React.Component {
       xMovement: (endPoint.x - this.state.windowDem.midScreenX) / maxTimeAlive / this.state.refreshRate, //be
       yMovement: (endPoint.y - this.state.windowDem.midScreenY) / maxTimeAlive / this.state.refreshRate
     };
+    const growthRate = 10;
+    const finishedStats = {
+      maxHeight: maxTimeAlive * this.state.refreshRate * growthRate,
+      x: endPoint.x - (Math.sin((90 - (rotation - 90)) * Math.PI / 180) * this.maxHeight),
+      y: endPoint.y - ((Math.cos((90 - (rotation - 90)) * Math.PI / 180) * halfH) + this.maxHeight)
+    };
+    const animateStar = `
+      0% {
+        height: ${height};
+        top: ${position.y};
+        left: ${position.x};
+      }
+      100% {
+        height: ${finishedStats.maxHeight};
+        top: ${finishedStats.y};
+        left: ${finishedStats.x};
+      }
+    `;
     const lifeSpan = 6000;
     const maxSize = (position.left - this.state.windowDem.midScreenX) + (position.top - this.state.windowDem.midScreenX) / (this.state.windowDem.width + this.state.windowDem.height);
     const tempStarsArray = this.state.starsArray;
@@ -119,7 +137,9 @@ export class StarsBoxContainer extends React.Component {
       height: height,
       movement: {x: movement.xMovement, y: movement.yMovement},
       timeAlive: 0,
-      lifeSpan: lifeSpan
+      lifeSpan: lifeSpan,
+      growthRate: growthRate,
+      animateStar: animateStar
     });
     this.setState({
       starsArray: tempStarsArray
