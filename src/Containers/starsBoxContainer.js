@@ -66,7 +66,7 @@ export class StarsBoxContainer extends React.Component {
     const width = 5;
     const height = 50;
     const halfH = .5 * height;
-    
+
     let slope; //slope isn't always rise over run, it's actually just the opposite offset over adjacent offset
     let rotation;
     //Determine angle it needs to be rotated based on how farm from middle it is
@@ -105,8 +105,8 @@ export class StarsBoxContainer extends React.Component {
     console.log(endPoint);
     const maxTimeAlive = 3;
     const movement = {
-      xMovement: (endPoint.x - this.state.windowDem.midScreenX) / 3 / this.state.refreshRate, //be
-      yMovement: (endPoint.y - this.state.windowDem.midScreenY) / 3 / this.state.refreshRate
+      xMovement: (endPoint.x - this.state.windowDem.midScreenX) / maxTimeAlive / this.state.refreshRate, //be
+      yMovement: (endPoint.y - this.state.windowDem.midScreenY) / maxTimeAlive / this.state.refreshRate
     };
     const lifeSpan = 6000;
     const maxSize = (position.left - this.state.windowDem.midScreenX) + (position.top - this.state.windowDem.midScreenX) / (this.state.windowDem.width + this.state.windowDem.height);
