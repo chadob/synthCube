@@ -61,26 +61,37 @@ export class StarsBoxContainer extends React.Component {
     };
     const position = {
       left: 810,
-      top: 500
+      top: 300
     };
-    const slope = (position.top - this.state.windowDem.midScreenY) / (position.left - this.state.windowDem.midScreenX);
-    const rotation = Math.atan(slope) * 180/Math.PI + 270;
     const width = 5;
     const height = 50;
     const halfH = .5 * height;
-    //law of cosines c^2 = a^2 + b^2 - 2abcosC
-    const hyp = Math.sqrt(Math.pow(halfH, 2) + Math.pow(halfH,2) - (2 * halfH * halfH * Math.cos(Math.abs((180 - rotation) / 2) * Math.PI /180)));
-    console.log(Math.cos(Math.abs((180 - rotation) / 2) * Math.PI /180));
-    console.log(hyp);
-    //tangent of known angle over hypoteneuse = tangent of other known angle over unknown side
-    const tOffset = (hyp /Math.tan(90 * Math.PI /180)) * Math.tan((90 - ((180 - rotation) / 2)) * Math.PI /180);
-    //a^2 + b^2 = c^2. Solving for a
-    const lOffset = Math.sqrt(Math.abs(Math.pow(hyp, 2) - Math.pow(tOffset, 2)));
-    position.left = position.left + lOffset;
-    position.top = position.top + tOffset;
-    console.log(position.left);
-    console.log(position.top);
-    console.log(rotation);
+    
+    let slope; //slope isn't always rise over run, it's actually just the opposite offset over adjacent offset
+    let rotation;
+    //Determine angle it needs to be rotated based on how farm from middle it is
+    if (position.top > this.state.windowDem.midScreenY) {
+      if (position.left > this.state.windowDem.midScreenX) {
+        slope = Math.abs((position.top - this.state.windowDem.midScreenY) / (position.left - this.state.windowDem.midScreenX));
+        rotation = Math.atan(slope) * 180/Math.PI + 90;
+      } else {
+        slope = Math.abs((position.left - this.state.windowDem.midScreenX) / (position.top - this.state.windowDem.midScreenY));
+        rotation = Math.atan(slope) * 180/Math.PI + 180;
+      }
+    } else {
+      if (position.left > this.state.windowDem.midScreenX) {
+        slope = Math.abs((position.left - this.state.windowDem.midScreenX) / (position.top - this.state.windowDem.midScreenY));
+        rotation = Math.atan(slope) * 180/Math.PI + 0;
+      } else {
+        slope = Math.abs((position.top - this.state.windowDem.midScreenY) / (position.left - this.state.windowDem.midScreenX));
+        rotation = Math.atan(slope) * 180/Math.PI + 270;
+      }
+    }
+    const tOffset = (Math.cos((90 - (rotation - 90)) * Math.PI / 180) * halfH) + halfH;
+    const lOffset = (Math.sin((90 - (rotation - 90)) * Math.PI / 180) * halfH);
+    position.left = position.left - lOffset;
+    position.top = position.top - tOffset;
+
     const distanceMid = Math.sqrt(Math.pow((position.left - this.state.windowDem.midScreenX), 2) + (Math.pow(position.top - this.state.windowDem.midScreenX), 2));
     const percentDone = {
       x: position.left / this.state.windowDem.width,
