@@ -11,10 +11,11 @@ export class StarContainer extends React.Component {
       rotation: this.props.rotation,
       width: this.props.width,
       height: this.props.height,
-      movement: this.props.movement,
       growthRate: this.props.growthRate,
       timeAlive: this.props.timeAlive,
-      lifeSpan: this.props.lifeSpan
+      lifeSpan: this.props.lifeSpan,
+      id: this.props.id,
+      finishedStats: this.props.finishedStats
     };
   }
   componentDidMount(prevProps, prevState) {
@@ -22,6 +23,28 @@ export class StarContainer extends React.Component {
     //   () =>
     //     this.tick(), 1000/6
     // );
+    let styleSheet = document.styleSheets[7];
+    console.log(styleSheet);
+    let animationName = `animation${this.state.id}`;
+    let animateStar =
+    `@-webkit-keyframes ${animationName} {
+      0% {
+        height: ${this.state.height};
+        top: ${this.state.position.top};
+        left: ${this.state.position.left};
+      }
+      100% {
+        height: ${this.state.finishedStats.maxHeight};
+        top: ${this.state.finishedStats.y};
+        left: ${this.state.finishedStats.x};
+      }
+    }`;
+    styleSheet.insertRule(animateStar, styleSheet.cssRules.length);
+
+    this.setState({
+      animateStar: animateStar,
+      animationName: animationName
+    });
   }
   // tick() {
   //   this.setState({
@@ -53,7 +76,7 @@ export class StarContainer extends React.Component {
   render() {
     return (
       <div className="star-container">
-        <Star position={this.state.position} rotation={this.state.rotation} color={this.props.starColor} movement={this.props.movement} width={this.state.width} height={this.state.height} />
+        <Star animationName={this.state.animationName} animateStar={this.state.animateStar} lifeSpan={this.state.lifeSpan} position={this.state.position} rotation={this.state.rotation} color={this.props.starColor} width={this.state.width} height={this.state.height} />
       </div>
     );
   }

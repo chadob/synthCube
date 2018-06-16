@@ -7,6 +7,7 @@ export class StarsBox extends React.Component {
       <div style={{width: this.props.width, height: this.props.height}}>
         {this.props.starsArray.map((star, index) =>
           <StarContainer
+            id={index}
             starsArray={this.props.starsArray}
             identity={index}
             deleteStar={this.props.deleteStar}
@@ -19,7 +20,7 @@ export class StarsBox extends React.Component {
             height={star.height}
             movement={star.movement}
             growthRate={star.growthRate}
-            animateStar={star.animateStar}
+            finishedStats={star.finishedStats}
             timeAlive={star.timeAlive}
             lifeSpan={star.lifeSpan}
           />
