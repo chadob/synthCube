@@ -29,14 +29,14 @@ export class StarContainer extends React.Component {
     let animateStar =
     `@-webkit-keyframes ${animationName} {
       0% {
-        height: ${this.state.height};
-        top: ${this.state.position.top};
-        left: ${this.state.position.left};
+        height: ${this.state.height}px;
+        top: ${this.state.position.top}px;
+        left: ${this.state.position.left}px;
       }
       100% {
-        height: ${this.state.finishedStats.maxHeight};
-        top: ${this.state.finishedStats.y};
-        left: ${this.state.finishedStats.x};
+        height: ${this.state.finishedStats.maxHeight}px;
+        top: ${this.state.finishedStats.y}px;
+        left: ${this.state.finishedStats.x}px;
       }
     }`;
     styleSheet.insertRule(animateStar, styleSheet.cssRules.length);
