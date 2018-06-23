@@ -6,6 +6,7 @@ body {
   height: 100%;
   width: 100%;
   background: black;
+  overflow: hidden;
 }
 #root {
   height: 100%;
@@ -14,6 +15,7 @@ body {
 .App {
   height: 100%;
   width: 100%;
+
 }
 .middle-dot {
   height: 1px;

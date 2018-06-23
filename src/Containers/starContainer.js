@@ -24,7 +24,6 @@ export class StarContainer extends React.Component {
     //     this.tick(), 1000/6
     // );
     let styleSheet = document.styleSheets[7];
-    console.log(styleSheet);
     let animationName = `animation${this.state.id}`;
     let animateStar =
     `@-webkit-keyframes ${animationName} {
@@ -35,48 +34,31 @@ export class StarContainer extends React.Component {
       }
       100% {
         height: ${this.state.finishedStats.maxHeight}px;
+        width: ${this.state.finishedStats.maxWidth}px;
         top: ${this.state.finishedStats.y}px;
         left: ${this.state.finishedStats.x}px;
       }
     }`;
     styleSheet.insertRule(animateStar, styleSheet.cssRules.length);
+    let starClass = `star${this.state.id}`;
+    let shadow =
+    `#star${this.state.id} {
+      box-shadow:
+        inset 0px 0px 5px 0px ${this.state.starColor},
+        0px 0px 3px 3px ${this.state.starColor};
+      ;
+    }`;
+    styleSheet.insertRule(shadow, styleSheet.cssRules.length);
 
     this.setState({
       animateStar: animateStar,
       animationName: animationName
     });
   }
-  // tick() {
-  //   this.setState({
-  //     timeAlive: this.state.timeAlive +=1000/60
-  //   })
-  //   if (this.state.timeAlive < this.state.lifeSpan) {
-  //     // this.moveStar();
-  //     // this.growStar();
-  //   } else {
-  //     clearInterval(this.cubeTimer);
-  //     this.props.deleteStar(this.props.identity);
-  //   }
-  // }
-  // moveStar() {
-  //   this.setState({
-  //     position: {
-  //       left: (this.state.position.left >= this.props.midScreenX ? this.state.position.left += this.state.movement.x : this.state.position.left -= this.state.movement.x),
-  //       top: (this.state.position.top >= this.props.midScreenY ? this.state.position.top += this.state.movement.y : this.state.position.top -= this.state.movement.y)
-  //     }
-  //   });
-  // }
-  // growStar() {
-  //   const newHeight = this.state.height;
-  //   this.setState({
-  //     width: this.state.width,
-  //     height: newHeight + 10
-  //   });
-  // }
   render() {
     return (
       <div className="star-container">
-        <Star animationName={this.state.animationName} animateStar={this.state.animateStar} lifeSpan={this.state.lifeSpan} position={this.state.position} rotation={this.state.rotation} color={this.props.starColor} width={this.state.width} height={this.state.height} />
+        <Star id={this.state.id} animationName={this.state.animationName} animateStar={this.state.animateStar} lifeSpan={this.state.lifeSpan} position={this.state.position} rotation={this.state.rotation} color={this.props.starColor} width={this.state.width} height={this.state.height} />
       </div>
     );
   }

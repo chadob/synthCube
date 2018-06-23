@@ -3,7 +3,7 @@ import '../Styles/star.css';
 export class Star extends React.Component {
   render() {
     return (
-      <div className="star" style={{
+      <div className="star" id={"star" + this.props.id} style={{
         animationName: this.props.animationName,
         animationTimingFunction: 'linear',
         animationDuration: this.props.lifeSpan + 's',
@@ -16,7 +16,9 @@ export class Star extends React.Component {
         transform: 'rotate(' + this.props.rotation + 'deg)',
         width: this.props.width,
         height: this.props.height,
-        background: this.props.color
+        background: 'white',
+        borderRadius: '3px',
+        zIndex: this.props.width
         }}>
       </div>
     );
