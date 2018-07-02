@@ -93,7 +93,16 @@ export class StarsBoxContainer extends React.Component {
     const maxWidth = width + 5;
     let distanceMid;
     let endDM;
+    let yInt;
+    let distance;
     const tMaxOffset = .5 * maxHeight
+
+
+    const adjSlope = (this.state.windowDem.midScreenX - position.left) / (this.state.windowDem.midScreenY - position.top);
+    //y and x int are flipped because of weird equation things
+    const adjYInt = -1 * adjSlope * position.left;
+    const adjXVal = (this.state.windowDem.width - adjYInt) / adjSlope;
+
     if (position.top > this.state.windowDem.midScreenY) {
       if (position.left > this.state.windowDem.midScreenX) {
         const distanceMid = Math.sqrt(Math.pow(position.left - this.state.windowDem.midScreenX, 2) + (Math.pow(position.top - this.state.windowDem.midScreenY, 2)));
@@ -109,19 +118,20 @@ export class StarsBoxContainer extends React.Component {
         const distanceMid = Math.sqrt(Math.pow(position.left - this.state.windowDem.midScreenX, 2) + (Math.pow(this.state.windowDem.midScreenY - position.top, 2)));
         endDM = distanceMid + Math.sqrt(Math.pow(this.state.windowDem.midScreenX, 2) + (Math.pow(this.state.windowDem.midScreenY, 2)));
         endPoint = {x: Math.sin(rotation * Math.PI/180) * endDM + this.state.windowDem.midScreenX, y: this.state.windowDem.midScreenY - Math.cos(rotation * Math.PI/180) * endDM - tMaxOffset};
-        endPoint = {x: position.left + Math.abs(1 / slope) * this.state.windowDem.midScreenY + Math.sin(rotation * Math.PI/180) * tMaxOffset, y: position.top - Math.abs(slope) * this.state.windowDem.midScreenX + Math.sin(rotation * Math.PI/180) * tMaxOffset};
-        if (this.state.windowDem.midScreenX < this.state.windowDem.midScreenY) {
-          endPoint = {x: position.left + (this.state.windowDem.width - position.left) + Math.sin(rotation * Math.PI/180) * tMaxOffset, y: position.top - Math.abs(slope) * (this.state.windowDem.width - position.left) + Math.sin(rotation * Math.PI/180) * tMaxOffset};
+        if (Math.sqrt(Math.pow((position.top - 0), 2) + Math.pow((position.left - adjYInt), 2)) >= Math.sqrt(Math.pow((position.top - adjXVal), 2) + Math.pow((position.left - this.state.windowDem.width), 2))) {
+          endPoint = {x: this.state.windowDem.width + Math.sin(rotation * Math.PI/180) * tMaxOffset, y: adjXVal - Math.sin(rotation * Math.PI/180) * tMaxOffset};
         } else {
-          endPoint = {x: position.left + Math.abs(1 / slope) * (position.top - 0) + Math.sin(rotation * Math.PI/180) * tMaxOffset, y: position.top - (position.top - 0) + Math.sin(rotation * Math.PI/180) * tMaxOffset};
+          endPoint = {x: adjYInt + Math.sin(rotation * Math.PI/180) * tMaxOffset, y: 0 - Math.sin(rotation * Math.PI/180) * tMaxOffset};
         }
+
         console.log("Position Left: " + position.left);
         console.log("Mid screen X: " + this.state.windowDem.midScreenX);
-        console.log("Edge screen x:" + Math.abs(1 / slope) * (this.state.windowDem.midScreenY - position.top));
+        console.log("Edge screen x: " + this.state.windowDem.width);
         console.log("Position top: " + position.top);
         console.log("mid screen y: " + this.state.windowDem.midScreenY)
-        console.log("Edge screen y:" + (this.state.windowDem.midScreenY - position.top));
+        console.log("Edge screen y: " + slope * this.state.windowDem.width + yInt);
         console.log("Slope:" + slope);
+        console.log('yInt: ' + yInt)
         console.log(Math.sin(rotation * Math.PI/180) * tMaxOffset);
         console.log(endPoint);
       } else {
