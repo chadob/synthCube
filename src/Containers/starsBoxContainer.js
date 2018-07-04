@@ -55,7 +55,7 @@ export class StarsBoxContainer extends React.Component {
       top: Math.floor(Math.random() * Math.floor(this.state.windowDem.height))
     };
     const width = Math.floor(Math.random() * 5) + 1;
-    const height = 1;
+    const height = 150;
     const halfH = .5 * height;
     let tanLine; //tanLine isn't always rise over run, it's actually just the opposite offset over adjacent offset
     let rotation;
@@ -121,13 +121,18 @@ export class StarsBoxContainer extends React.Component {
         //after we check which distance is greater we flip the y and x so that we can use them in code and assign them to endpoint
         if (rotation > 45) {
         // if (Math.sqrt(Math.pow((position.top - adjYInt.x), 2) + Math.pow((position.left - adjYInt.y), 2)) >= Math.sqrt(Math.pow((position.top - adjXVal.x), 2) + Math.pow((position.left - adjXVal.y), 2))) {
-          endPoint = {x: adjYInt.y + Math.sin(rotation * Math.PI/180) * tMaxOffset, y: adjYInt.x - Math.sin(rotation * Math.PI/180) * tMaxOffset};
+          endPoint = {x: adjXVal.y + Math.sin(rotation * Math.PI/180) * tMaxOffset, y: adjXVal.x + Math.sin(rotation * Math.PI/180) * tMaxOffset};
         } else {
-          endPoint = {x: adjXVal.y + Math.sin(rotation * Math.PI/180) * tMaxOffset, y: adjXVal.x - Math.sin(rotation * Math.PI/180) * tMaxOffset};
+          endPoint = {x: adjYInt.y + Math.sin(rotation * Math.PI/180) * tMaxOffset, y: adjYInt.x + Math.sin(rotation * Math.PI/180) * tMaxOffset};
         }
 
         console.log("Slope:" + slope);
         console.log('yInt: ' + adjYInt);
+        console.log('rotation: ' + rotation);
+        console.log("adjustmentX: " + Math.sin(rotation * Math.PI/180) * tMaxOffset)
+        console.log("adjustmentY: " + adjYInt.x);
+        console.log(Math.sin(rotation * Math.PI/180) * tMaxOffset);
+        console.log("adjustmentY: " + (adjYInt.x - Math.sin(rotation * Math.PI/180) * tMaxOffset))
         console.log("Position Left: " + position.left + " Position top: " + position.top);
         console.log("Mid screen X: " + this.state.windowDem.midScreenX + " mid screen y: " + this.state.windowDem.midScreenY);
         console.log(endPoint);
