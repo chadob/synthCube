@@ -1,3 +1,4 @@
 .star {
   position: absolute;
+  transform-origin: top left;
 }

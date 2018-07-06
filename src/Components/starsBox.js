@@ -7,6 +7,7 @@ export class StarsBox extends React.Component {
       <div style={{width: this.props.width, height: this.props.height}}>
         {this.props.starsArray.map((star, index) =>
           <StarContainer
+            origPos={star.origPos}
             id={index}
             starsArray={this.props.starsArray}
             identity={index}

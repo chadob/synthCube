@@ -18,6 +18,7 @@ export class Star extends React.Component {
         height: this.props.height,
         background: 'white',
         borderRadius: '3px',
+        borderTop: '5px solid yellow',
         zIndex: this.props.width
         }}>
       </div>

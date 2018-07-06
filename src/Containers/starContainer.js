@@ -6,6 +6,7 @@ export class StarContainer extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      origPos: this.props.origPos,
       starColor: this.props.starColor,
       position: this.props.position,
       rotation: this.props.rotation,
