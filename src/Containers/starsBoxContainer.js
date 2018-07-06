@@ -25,7 +25,7 @@ export class StarsBoxContainer extends React.Component {
   }
   starSpawnInterval(i) {
     i++;
-    if (i < 100) {
+    if (i < 10) {
       this.spawnStar();
       const interval = 5;
       setTimeout( ()=> {
@@ -68,9 +68,9 @@ export class StarsBoxContainer extends React.Component {
         rotation = Math.atan(tanLine) * 180/Math.PI + 270;
       }
     }
-    const lifeSpan = -.5* width + 3.5;
+    const lifeSpan = -.5* width + 7;
     const growthRate = 1;
-    const maxHeight = 150;
+    const maxHeight = 300;
     const maxWidth = width + 5;
     //y and x int are flipped because of weird equation things
     let adjYInt;
@@ -80,18 +80,27 @@ export class StarsBoxContainer extends React.Component {
 
     if (position.top > this.state.windowDem.midScreenY) {
       if (position.left > this.state.windowDem.midScreenX) {
-        yInt = position.left - (adjSlope * position.top)
-        adjYInt = {x: this.state.windowDem.height, y: adjSlope * this.state.windowDem.height + yInt};
-        adjXVal = {x: (this.state.windowDem.width - yInt) / adjSlope, y: this.state.windowDem.width};
+        yInt = position.left - (adjSlope * position.top);
+        adjYInt = {x: this.state.windowDem.height * 2, y: adjSlope * this.state.windowDem.height * 2 + yInt};
+        adjXVal = {x: (this.state.windowDem.width * 2 - yInt) / adjSlope, y: this.state.windowDem.width * 2};
         if (rotation > 135) {
           endPoint = {x: adjXVal.y + Math.sin(rotation * Math.PI/180) * maxHeight, y: adjXVal.x - Math.cos(rotation * Math.PI/180) * maxHeight};
         } else {
           endPoint = {x: adjYInt.y + Math.sin(rotation * Math.PI/180) * maxHeight, y: adjYInt.x - Math.cos(rotation * Math.PI/180) * maxHeight};
         }
+        console.log("Slope:" + adjSlope);
+        console.log('rotation: ' + rotation);
+        console.log("adjustmentX: " + Math.sin(rotation * Math.PI/180) * maxHeight)
+        console.log("adjustmentY: " + Math.cos(rotation * Math.PI/180) * maxHeight);
+        console.log("Position Left: " + position.left + " Position top: " + position.top);
+        console.log("Mid screen X: " + this.state.windowDem.midScreenX + " mid screen y: " + this.state.windowDem.midScreenY);
+        console.log(endPoint);
+        console.log(adjXVal);
+        console.log(adjYInt);
       } else {
-        yInt = position.left - (adjSlope * position.top)
-        adjYInt = {x: this.state.windowDem.height, y: adjSlope * this.state.windowDem.height + yInt};
-        adjXVal = {x: (0 - yInt) / adjSlope, y: 0};
+        yInt = position.left - (adjSlope * position.top);
+        adjYInt = {x: this.state.windowDem.height * 2, y: adjSlope * this.state.windowDem.height * 2 + yInt};
+        adjXVal = {x: (-1 * this.state.windowDem.width - yInt) / adjSlope, y: -1 * this.state.windowDem.width};
         if (rotation > 225) {
           endPoint = {x: adjXVal.y + Math.sin(rotation * Math.PI/180) * maxHeight, y: adjXVal.x - Math.cos(rotation * Math.PI/180) * maxHeight};
         } else {
@@ -100,26 +109,19 @@ export class StarsBoxContainer extends React.Component {
       }
     } else {
       if (position.left > this.state.windowDem.midScreenX) {
-        adjYInt = {x: 0, y: position.left - (adjSlope * position.top)};
-        adjXVal = {x: (this.state.windowDem.width - adjYInt.y) / adjSlope, y: this.state.windowDem.width};
+        yInt = position.left - (adjSlope * position.top);
+        adjYInt = {x: -1 * this.state.windowDem.height, y: (adjSlope * -1 * this.state.windowDem.height) + yInt};
+        adjXVal = {x: (this.state.windowDem.width * 2 - yInt) / adjSlope, y: this.state.windowDem.width * 2};
         //after we check which distance is greater we flip the y and x so that we can use them in code and assign them to endpoint
         if (rotation > 45) {
           endPoint = {x: adjXVal.y + Math.sin(rotation * Math.PI/180) * maxHeight, y: adjXVal.x - Math.cos(rotation * Math.PI/180) * maxHeight};
         } else {
           endPoint = {x: adjYInt.y + Math.sin(rotation * Math.PI/180) * maxHeight, y: adjYInt.x - Math.cos(rotation * Math.PI/180) * maxHeight};
         }
-        // console.log("Slope:" + slope);
-        // console.log('rotation: ' + rotation);
-        // console.log("adjustmentX: " + Math.sin(rotation * Math.PI/180) * maxHeight)
-        // console.log("adjustmentY: " + Math.cos(rotation * Math.PI/180) * maxHeight);
-        // console.log("Position Left: " + position.left + " Position top: " + position.top);
-        // console.log("Mid screen X: " + this.state.windowDem.midScreenX + " mid screen y: " + this.state.windowDem.midScreenY);
-        // console.log(endPoint);
-        // console.log(adjXVal);
-        // console.log(adjYInt);
       } else {
-        adjYInt = {x: 0, y: position.left - (adjSlope * position.top)};
-        adjXVal = {x: (0 - adjYInt.y) / adjSlope, y: 0};
+        yInt = position.left - (adjSlope * position.top);
+        adjYInt = {x: -1 * this.state.windowDem.height, y: (adjSlope * -1 * this.state.windowDem.height) + yInt};
+        adjXVal = {x: (-1 * this.state.windowDem.width - yInt) / adjSlope, y: -1 * this.state.windowDem.width};
         if (rotation > 315) {
           endPoint = {x: adjXVal.y, y: adjXVal.x};
         } else {
