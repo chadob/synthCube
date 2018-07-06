@@ -84,9 +84,9 @@ export class StarsBoxContainer extends React.Component {
         adjYInt = {x: this.state.windowDem.height * 2, y: adjSlope * this.state.windowDem.height * 2 + yInt};
         adjXVal = {x: (this.state.windowDem.width * 2 - yInt) / adjSlope, y: this.state.windowDem.width * 2};
         if (rotation > 135) {
-          endPoint = {x: adjXVal.y + Math.sin(rotation * Math.PI/180) * maxHeight, y: adjXVal.x - Math.cos(rotation * Math.PI/180) * maxHeight};
-        } else {
           endPoint = {x: adjYInt.y + Math.sin(rotation * Math.PI/180) * maxHeight, y: adjYInt.x - Math.cos(rotation * Math.PI/180) * maxHeight};
+        } else {
+          endPoint = {x: adjXVal.y + Math.sin(rotation * Math.PI/180) * maxHeight, y: adjXVal.x - Math.cos(rotation * Math.PI/180) * maxHeight};
         }
         console.log("Slope:" + adjSlope);
         console.log('rotation: ' + rotation);
@@ -123,9 +123,9 @@ export class StarsBoxContainer extends React.Component {
         adjYInt = {x: -1 * this.state.windowDem.height, y: (adjSlope * -1 * this.state.windowDem.height) + yInt};
         adjXVal = {x: (-1 * this.state.windowDem.width - yInt) / adjSlope, y: -1 * this.state.windowDem.width};
         if (rotation > 315) {
-          endPoint = {x: adjXVal.y, y: adjXVal.x};
-        } else {
           endPoint = {x: adjYInt.y, y: adjYInt.x};
+        } else {
+          endPoint = {x: adjXVal.y, y: adjXVal.x};
         }
       }
     }
