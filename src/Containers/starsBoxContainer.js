@@ -25,9 +25,9 @@ export class StarsBoxContainer extends React.Component {
   }
   starSpawnInterval(i) {
     i++;
-    if (i < 10) {
+    if (i < 1000) {
       this.spawnStar();
-      const interval = 5;
+      const interval = 1;
       setTimeout( ()=> {
         this.starSpawnInterval(i);
       }, interval);
@@ -45,6 +45,7 @@ export class StarsBoxContainer extends React.Component {
       top: Math.floor(Math.random() * Math.floor(this.state.windowDem.height))
     };
     let origPos = position;
+    // const width = Math.floor(Math.random() * 3) + 1;
     const width = Math.floor(Math.random() * 5) + 1;
     const height = 1;
     let tanLine; //tanLine isn't always rise over run, it's actually just the opposite offset over adjacent offset
@@ -68,7 +69,8 @@ export class StarsBoxContainer extends React.Component {
         rotation = Math.atan(tanLine) * 180/Math.PI + 270;
       }
     }
-    const lifeSpan = -.5* width + 7;
+    // const lifeSpan = -.5* width + 6.5;
+    const lifeSpan = 6;
     const growthRate = 1;
     const maxHeight = 300;
     const maxWidth = width + 5;
@@ -88,15 +90,6 @@ export class StarsBoxContainer extends React.Component {
         } else {
           endPoint = {x: adjXVal.y + Math.sin(rotation * Math.PI/180) * maxHeight, y: adjXVal.x - Math.cos(rotation * Math.PI/180) * maxHeight};
         }
-        console.log("Slope:" + adjSlope);
-        console.log('rotation: ' + rotation);
-        console.log("adjustmentX: " + Math.sin(rotation * Math.PI/180) * maxHeight)
-        console.log("adjustmentY: " + Math.cos(rotation * Math.PI/180) * maxHeight);
-        console.log("Position Left: " + position.left + " Position top: " + position.top);
-        console.log("Mid screen X: " + this.state.windowDem.midScreenX + " mid screen y: " + this.state.windowDem.midScreenY);
-        console.log(endPoint);
-        console.log(adjXVal);
-        console.log(adjYInt);
       } else {
         yInt = position.left - (adjSlope * position.top);
         adjYInt = {x: this.state.windowDem.height * 2, y: adjSlope * this.state.windowDem.height * 2 + yInt};
